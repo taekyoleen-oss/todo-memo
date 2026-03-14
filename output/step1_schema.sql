@@ -1,0 +1,22 @@
+-- ============================================================
+-- step1_schema.sql
+-- TaskFlow 전체 DB 마이그레이션
+-- 생성: db-architect 에이전트
+-- 참조: api-designer (Server Actions), ui-builder (타입)
+-- ============================================================
+-- 이 파일은 db-architect 에이전트가 실제 구현 시 채웁니다.
+-- 아래는 참조용 구조 예시입니다.
+
+-- [실행 전 확인사항]
+-- 1. Supabase 프로젝트: 새 프로젝트 (빈 슬레이트)
+-- 2. tf_ 접두사 사용으로 기존 테이블과 충돌 방지
+-- 3. 태그 시스템(tf_tags, tf_todo_tags, tf_memo_tags) 없음
+
+-- TODO: db-architect 에이전트가 아래 내용을 완성합니다.
+-- 1. update_updated_at() 트리거 함수
+-- 2. tf_todos 테이블 + 인덱스 + 트리거 + RLS
+-- 3. tf_categories 테이블 + 인덱스 + RLS
+-- 4. tf_memos 테이블 (content jsonb, content_text generated) + 인덱스 + 트리거 + RLS
+-- 5. tf_memo_images 테이블 + 인덱스 + RLS
+-- 6. Storage 버킷 tf-memo-images + RLS 정책
+-- 7. Realtime: tf_todos, tf_memos 활성화
