@@ -93,13 +93,8 @@ CREATE TABLE tf_memos (
   category_id  uuid REFERENCES tf_categories(id) ON DELETE SET NULL,
   title        text,
   content      jsonb,                  -- Tiptap JSON
-  content_text text GENERATED ALWAYS AS (
-    coalesce(
-      (SELECT string_agg(val::text, ' ' ORDER BY ordinality)
-       FROM jsonb_path_query(content, 'strict $.**.text') WITH ORDINALITY AS t(val, ordinality)),
-      ''
-    )
-  ) STORED,                            -- FTS용 plain text
+  content_text text NOT NULL DEFAULT '',  -- 트리거로 자동 갱신 (FTS용 plain text)
+  -- PostgreSQL Generated Column은 서브쿼리 불가 → BEFORE INSERT OR UPDATE 트리거 사용
   card_color   text DEFAULT '#FFFFFF',
   font_size    text DEFAULT 'medium'
                  CHECK (font_size IN ('small','medium','large','xlarge')),

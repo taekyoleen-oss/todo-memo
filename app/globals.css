@@ -47,75 +47,111 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ─── TaskFlow 라이트 테마 ─────────────────────────────────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* 기본 팔레트 */
+  --background:            #F9F9FB;
+  --foreground:            #111827;
+  --card:                  #FFFFFF;
+  --card-foreground:       #111827;
+  --popover:               #FFFFFF;
+  --popover-foreground:    #111827;
+
+  /* Primary: 인디고 */
+  --primary:               #5B6CF9;
+  --primary-hover:         #4A5AE8;
+  --primary-foreground:    #FFFFFF;
+
+  /* Secondary / Muted / Accent */
+  --secondary:             #F4F4F6;
+  --secondary-foreground:  #6B7280;
+  --muted:                 #F4F4F6;
+  --muted-foreground:      #9CA3AF;
+  --accent:                #F4F4F6;
+  --accent-foreground:     #111827;
+
+  /* 경계선 / 인풋 / 링 */
+  --border:                #E5E7EB;
+  --input:                 #E5E7EB;
+  --ring:                  #5B6CF9;
+
+  /* 파괴적 액션 */
+  --destructive:           #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  /* 차트 색상 (기존 유지) */
+  --chart-1:               oklch(0.809 0.105 251.813);
+  --chart-2:               oklch(0.623 0.214 259.815);
+  --chart-3:               oklch(0.546 0.245 262.881);
+  --chart-4:               oklch(0.488 0.243 264.376);
+  --chart-5:               oklch(0.424 0.199 265.638);
+
+  /* 레이아웃 */
+  --radius:                0.5rem;
+
+  /* 사이드바 (미사용이지만 shadcn 호환 유지) */
+  --sidebar:               #F9F9FB;
+  --sidebar-foreground:    #111827;
+  --sidebar-primary:       #5B6CF9;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:        #F4F4F6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border:        #E5E7EB;
+  --sidebar-ring:          #5B6CF9;
+
+  /* TaskFlow 커스텀 토큰 */
+  --star-gold:             #F59E0B;
+  --star-border:           #FCD34D;
+  --surface:               #FFFFFF;
+  --text-primary:          #111827;
+  --text-secondary:        #6B7280;
+  --text-muted:            #9CA3AF;
 }
 
+/* ─── 다크 테마 (최소한의 지원) ────────────────────────────────── */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background:            #0F172A;
+  --foreground:            #F1F5F9;
+  --card:                  #1E293B;
+  --card-foreground:       #F1F5F9;
+  --popover:               #1E293B;
+  --popover-foreground:    #F1F5F9;
+  --primary:               #818CF8;
+  --primary-hover:         #6366F1;
+  --primary-foreground:    #0F172A;
+  --secondary:             #1E293B;
+  --secondary-foreground:  #94A3B8;
+  --muted:                 #1E293B;
+  --muted-foreground:      #64748B;
+  --accent:                #1E293B;
+  --accent-foreground:     #F1F5F9;
+  --destructive:           #F87171;
+  --destructive-foreground: #0F172A;
+  --border:                rgba(255 255 255 / 10%);
+  --input:                 rgba(255 255 255 / 15%);
+  --ring:                  #818CF8;
+  --chart-1:               oklch(0.809 0.105 251.813);
+  --chart-2:               oklch(0.623 0.214 259.815);
+  --chart-3:               oklch(0.546 0.245 262.881);
+  --chart-4:               oklch(0.488 0.243 264.376);
+  --chart-5:               oklch(0.424 0.199 265.638);
+  --sidebar:               #1E293B;
+  --sidebar-foreground:    #F1F5F9;
+  --sidebar-primary:       #818CF8;
+  --sidebar-primary-foreground: #0F172A;
+  --sidebar-accent:        #0F172A;
+  --sidebar-accent-foreground: #F1F5F9;
+  --sidebar-border:        rgba(255 255 255 / 10%);
+  --sidebar-ring:          #818CF8;
+  --star-gold:             #FBBF24;
+  --star-border:           #FDE68A;
+  --surface:               #1E293B;
+  --text-primary:          #F1F5F9;
+  --text-secondary:        #94A3B8;
+  --text-muted:            #64748B;
 }
 
+/* ─── 기본 레이어 ──────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -127,3 +163,68 @@
     @apply font-sans;
   }
 }
+
+/* ─── 메모 카드 색상 (9가지 프리셋) ─────────────────────────────── */
+[data-card-color="white"]  { --memo-bg: #FFFFFF; }
+[data-card-color="yellow"] { --memo-bg: #FFF9C4; }
+[data-card-color="green"]  { --memo-bg: #DCFCE7; }
+[data-card-color="blue"]   { --memo-bg: #DBEAFE; }
+[data-card-color="purple"] { --memo-bg: #EDE9FE; }
+[data-card-color="pink"]   { --memo-bg: #FCE7F3; }
+[data-card-color="orange"] { --memo-bg: #FFEDD5; }
+[data-card-color="mint"]   { --memo-bg: #CCFBF1; }
+[data-card-color="gray"]   { --memo-bg: #F3F4F6; }
+
+.memo-card {
+  background-color: var(--memo-bg, #FFFFFF);
+}
+
+/* ─── 메모 카드 글자 크기 (카드 컨테이너 기준) ───────────────────── */
+[data-font-size="small"]  .memo-card-content { font-size: 0.75rem;  line-height: 1.5; }
+[data-font-size="medium"] .memo-card-content { font-size: 0.875rem; line-height: 1.6; }
+[data-font-size="large"]  .memo-card-content { font-size: 1rem;     line-height: 1.6; }
+[data-font-size="xlarge"] .memo-card-content { font-size: 1.125rem; line-height: 1.7; }
+
+/* ─── CSS Grid Masonry ───────────────────────────────────────── */
+.memo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-auto-rows: 8px;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 639px) {
+  .memo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .memo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── 애니메이션 ─────────────────────────────────────────────── */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.memo-card-enter {
+  animation: fadeInScale 200ms ease forwards;
+}
+
+@keyframes bounceIn {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.3); }
+}
+
+.star-bounce {
+  animation: bounceIn 300ms ease;
+}
+
+/* ─── 별표 강조 ──────────────────────────────────────────────── */
+.star-badge       { color: var(--star-gold); }
+.star-card-border { border-color: var(--star-border); }
