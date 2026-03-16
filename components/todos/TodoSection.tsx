@@ -136,18 +136,31 @@ export function TodoSection() {
 
       {/* 칸반 보드 */}
       <DndContext sensors={sensors} collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {KANBAN_STATUSES.map(status => (
-            <KanbanColumn
-              key={status}
-              status={status}
-              todos={byStatus[status]}
-              onRefetch={refetch}
-              selectedIds={selectedIds}
-              onSelect={handleSelect}
-              onMoveItem={handleMoveItem}
-            />
-          ))}
+        <div className="flex flex-col gap-4">
+          {/* 할일 — 상단 전체 너비, 카드 그리드 */}
+          <KanbanColumn
+            status="todo"
+            todos={byStatus['todo']}
+            onRefetch={refetch}
+            selectedIds={selectedIds}
+            onSelect={handleSelect}
+            onMoveItem={handleMoveItem}
+            cardLayout="grid"
+          />
+          {/* 진행 중 & 완료 — 하단 2열 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {(['in_progress', 'done'] as TodoStatus[]).map(status => (
+              <KanbanColumn
+                key={status}
+                status={status}
+                todos={byStatus[status]}
+                onRefetch={refetch}
+                selectedIds={selectedIds}
+                onSelect={handleSelect}
+                onMoveItem={handleMoveItem}
+              />
+            ))}
+          </div>
         </div>
       </DndContext>
 

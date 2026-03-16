@@ -19,9 +19,10 @@ interface Props {
   selectedIds: string[]
   onSelect: (id: string, checked: boolean) => void
   onMoveItem?: (todoId: string, direction: 'up' | 'down') => void
+  cardLayout?: 'list' | 'grid'
 }
 
-export function KanbanColumn({ status, todos, onRefetch, selectedIds, onSelect, onMoveItem }: Props) {
+export function KanbanColumn({ status, todos, onRefetch, selectedIds, onSelect, onMoveItem, cardLayout = 'list' }: Props) {
   const { setNodeRef, isOver } = useDroppable({ id: status })
   const { label, color } = columnConfig[status]
 
@@ -32,7 +33,15 @@ export function KanbanColumn({ status, todos, onRefetch, selectedIds, onSelect, 
         <span className="text-xs text-muted-foreground bg-white rounded-full px-2 py-0.5 border border-border">{todos.length}</span>
       </div>
       <SortableContext items={todos.map(t => t.id)} strategy={verticalListSortingStrategy}>
-        <div ref={setNodeRef} className="flex flex-col gap-2 flex-1">
+        <div
+          ref={setNodeRef}
+          className={cn(
+            'flex-1',
+            cardLayout === 'grid'
+              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 content-start'
+              : 'flex flex-col gap-2'
+          )}
+        >
           {todos.map((todo, idx) => (
             <TodoCard
               key={todo.id}
@@ -47,7 +56,7 @@ export function KanbanColumn({ status, todos, onRefetch, selectedIds, onSelect, 
             />
           ))}
           {todos.length === 0 && (
-            <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground py-8">
+            <div className={cn('flex items-center justify-center text-xs text-muted-foreground py-8', cardLayout === 'grid' ? 'col-span-full' : 'flex-1')}>
               비어 있음
             </div>
           )}
