@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskFlow
 
-## Getting Started
+**할 일과 메모, 이제 한 곳에서.**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 당신의 생각은 흩어지지 않아야 합니다
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+떠오른 아이디어는 메모앱에, 해야 할 일은 할 일앱에, 중요한 건 또 어딘가에.
+TaskFlow는 이 분산된 흐름을 하나의 화면으로 모읍니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 주요 기능
 
-## Learn More
+### ✅ To-Do — 명확한 흐름으로 일을 처리하세요
+- **상태 트래킹**: `할 일 → 진행 중 → 완료 → 보관` 단계별 관리
+- **우선순위**: Low / Medium / High / Urgent, 한눈에 파악
+- **완료일 달력**: D-day 카운트다운으로 마감을 놓치지 않게
+- **드래그 앤 드롭**: 내 방식대로 순서를 직접 정렬 (모바일은 ↑↓ 버튼)
 
-To learn more about Next.js, take a look at the following resources:
+### 📝 Memo — 생각을 카드로 담아두세요
+- **Tiptap 리치 에디터**: 체크리스트, 코드 블록, 링크, 하이라이트 지원
+- **카드형 그리드**: CSS Masonry 레이아웃으로 메모가 자연스럽게 배치
+- **9가지 카드 컬러**: 파스텔·뉴트럴 색상으로 메모를 구분
+- **카테고리 & 별표**: 분류하고, 중요한 건 별표로 모아보기
+- **이미지 첨부**: 드래그앤드롭 또는 업로드, 장당 최대 10MB
+- **1초 자동저장**: Google Keep처럼, 저장 버튼 없이도 안전하게
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 언제 어디서나, 어떤 기기에서도
 
-## Deploy on Vercel
+Supabase Realtime 기반 **멀티 디바이스 실시간 동기화** —
+노트북에서 저장하면 스마트폰에서 바로 반영됩니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 내 데이터는 오직 나만
+
+Row Level Security(RLS)로 사용자별 데이터가 **완전히 격리**됩니다.
+다른 사람은 내 메모와 할 일을 절대 볼 수 없어요.
+
+---
+
+## 기술 스택
+
+| | |
+|---|---|
+| 프레임워크 | Next.js 15 (App Router) |
+| UI | TweakCN / shadcn/ui + Tailwind CSS v4 |
+| 백엔드 | Supabase (DB · Auth · Storage · Realtime) |
+| 에디터 | Tiptap v3 |
+| 배포 | Vercel |
+
+---
+
+## 시작하기
+
+이메일 또는 **Google 계정**으로 바로 로그인.
+이메일 인증 없이 즉시 사용 가능합니다.
+
+---
+
+> **TaskFlow** — 생각을 정리하는 가장 단순한 방법.
+
+---
+
+## 더 많은 앱을 활용하거나 만들고 싶다면
+
+🚀 **바이브코딩랩 방문하기**
+[vibecodinglab.ai.kr](https://www.vibecodinglab.ai.kr)
