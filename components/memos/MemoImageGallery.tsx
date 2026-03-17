@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
-import { X, Upload } from 'lucide-react'
+import { X, Upload, ClipboardPaste } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { deleteMemoImage } from '@/actions/memos'
 import { useImageUpload } from '@/hooks/useImageUpload'
 import { toast } from 'sonner'
@@ -17,6 +18,34 @@ export function MemoImageGallery({ memoId, images, editable = false, onUpdate }:
   const { uploading, upload } = useImageUpload(memoId, (newImage) => {
     onUpdate([...images, newImage])
   })
+  const [pasteHighlight, setPasteHighlight] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!editable) return
+
+    function handlePaste(e: ClipboardEvent) {
+      if (images.length >= 5) return
+      const items = Array.from(e.clipboardData?.items ?? [])
+      const imageItem = items.find(item => item.type.startsWith('image/'))
+      if (!imageItem) return
+
+      const file = imageItem.getAsFile()
+      if (!file) return
+
+      setPasteHighlight(true)
+      setTimeout(() => setPasteHighlight(false), 600)
+      upload(file)
+    }
+
+    const container = containerRef.current
+    container?.addEventListener('paste', handlePaste)
+    window.addEventListener('paste', handlePaste)
+    return () => {
+      container?.removeEventListener('paste', handlePaste)
+      window.removeEventListener('paste', handlePaste)
+    }
+  }, [editable, images.length, upload])
 
   async function handleDelete(image: MemoImage) {
     try {
@@ -34,7 +63,13 @@ export function MemoImageGallery({ memoId, images, editable = false, onUpdate }:
   if (images.length === 0 && !editable) return null
 
   return (
-    <div className="mt-2 border-t border-border pt-2">
+    <div ref={containerRef} className="mt-2 border-t border-border pt-2">
+      {editable && (
+        <p className={`text-xs mb-1.5 flex items-center gap-1 transition-colors ${pasteHighlight ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
+          <ClipboardPaste className="h-3 w-3" />
+          Ctrl+V로 스크린샷을 바로 붙여넣을 수 있습니다
+        </p>
+      )}
       <div className="flex flex-wrap gap-1.5">
         {images.map(img => (
           <div key={img.id} className="relative group">
