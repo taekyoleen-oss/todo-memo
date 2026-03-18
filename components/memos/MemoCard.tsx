@@ -137,6 +137,7 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
         ref={containerRef}
         data-card-color={colorToKey(memo.card_color)}
         data-font-size={memo.font_size}
+        onMouseEnter={!isEditing ? handleStartEdit : undefined}
         className={cn(
           'memo-card group rounded-xl border border-border shadow-sm transition-all duration-150',
           'hover:-translate-y-0.5 hover:shadow-md',
@@ -220,7 +221,7 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
           )}
 
           {/* 에디터 / 본문 */}
-          <div onClick={!isEditing ? handleStartEdit : undefined} className={!isEditing ? 'cursor-pointer' : undefined}>
+          <div>
             <TiptapEditor
               content={memo.content as JSONContent | null}
               onChange={handleContentChange}
