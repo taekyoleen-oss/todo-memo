@@ -1,5 +1,6 @@
 'use client'
 import { useEditor, EditorContent } from '@tiptap/react'
+import { useEffect } from 'react'
 import StarterKit from '@tiptap/starter-kit'
 import TaskList from '@tiptap/extension-task-list'
 import TaskItem from '@tiptap/extension-task-item'
@@ -45,6 +46,15 @@ export function TiptapEditor({ content, onChange, editable = true, className }: 
       },
     },
   })
+
+  useEffect(() => {
+    if (editor && editor.isEditable !== editable) {
+      editor.setEditable(editable)
+      if (editable) {
+        setTimeout(() => editor.commands.focus('end'), 10)
+      }
+    }
+  }, [editor, editable])
 
   if (!editor) return null
 

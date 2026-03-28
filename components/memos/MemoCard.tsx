@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { Pin, Star, Trash2, MoreHorizontal, X } from 'lucide-react'
+import { Pin, Star, Trash2, MoreHorizontal, X, Pencil } from 'lucide-react'
 import { toast } from 'sonner'
 import { updateMemo, deleteMemo, toggleMemoPin, toggleMemoStar } from '@/actions/memos'
 import { Button } from '@/components/ui/button'
@@ -137,7 +137,17 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
         ref={containerRef}
         data-card-color={colorToKey(memo.card_color)}
         data-font-size={memo.font_size}
-        onMouseEnter={!isEditing ? handleStartEdit : undefined}
+        onClick={(e) => {
+          if (!isEditing) return
+          const target = e.target as HTMLElement
+          if (target.tagName === 'INPUT' || target.tagName === 'BUTTON' || target.closest('button')) return
+          setTimeout(() => {
+            const pm = containerRef.current?.querySelector('.ProseMirror') as HTMLElement
+            if (pm && document.activeElement !== pm) {
+              pm.focus()
+            }
+          }, 0)
+        }}
         className={cn(
           'memo-card group rounded-xl border border-border shadow-sm transition-all duration-150',
           'hover:-translate-y-0.5 hover:shadow-md',
@@ -162,7 +172,10 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
               )
             )}
             {/* 아이콘 버튼 (호버 시 표시) */}
-            <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+            <div 
+              className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+              onClick={e => e.stopPropagation()}
+            >
               <button onClick={handleStar} className={cn('p-1 rounded hover:bg-black/5 transition-colors', memo.is_starred && 'star-badge')}>
                 <Star className={cn('h-3.5 w-3.5', memo.is_starred ? 'fill-current text-amber-400' : 'text-muted-foreground')} />
               </button>
@@ -174,12 +187,16 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
                   <X className="h-3.5 w-3.5 text-muted-foreground" />
                 </button>
               ) : (
-                <DropdownMenu>
-                  <DropdownMenuTrigger render={<button className="p-1 rounded hover:bg-black/5 transition-colors" />}>
-                    <MoreHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={handleStartEdit}>편집</DropdownMenuItem>
+                <>
+                  <button onClick={handleStartEdit} title="편집" className="p-1 rounded hover:bg-black/5 transition-colors">
+                    <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
+                  </button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger render={<button className="p-1 rounded hover:bg-black/5 transition-colors" />}>
+                      <MoreHorizontal className="h-3.5 w-3.5 text-muted-foreground" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={handleStartEdit}>편집</DropdownMenuItem>
                     <DropdownMenuItem onClick={handlePin}>{memo.is_pinned ? '핀 해제' : '핀 고정'}</DropdownMenuItem>
                     <DropdownMenuItem onClick={handleStar}>{memo.is_starred ? '별표 해제' : '별표'}</DropdownMenuItem>
                     <DropdownMenuSeparator />
@@ -188,6 +205,7 @@ export function MemoCard({ memo, onRefetch, autosave, editingMemoId, autoEdit = 
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
+                </>
               )}
             </div>
           </div>

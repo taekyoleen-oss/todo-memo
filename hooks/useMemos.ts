@@ -23,9 +23,9 @@ export function useMemos(categoryId?: string | null) {
   // 편집 중인 메모 ID (Realtime 업데이트 무시용)
   const editingMemoId = useRef<string | null>(null)
 
-  const fetchMemos = useCallback(async (reset = false) => {
+  const fetchMemos = useCallback(async (reset = false, targetPage = page) => {
     const supabase = createClient()
-    const from = reset ? 0 : page * PAGE_SIZE
+    const from = reset ? 0 : targetPage * PAGE_SIZE
 
     let query = supabase
       .from('tf_memos')
@@ -49,7 +49,11 @@ export function useMemos(categoryId?: string | null) {
       setMemos(data ?? [])
       setPage(0)
     } else {
-      setMemos(prev => [...prev, ...(data ?? [])])
+      setMemos(prev => {
+        const existingIds = new Set(prev.map(m => m.id))
+        const newMemos = (data ?? []).filter(m => !existingIds.has(m.id))
+        return [...prev, ...newMemos]
+      })
     }
     setHasMore((data?.length ?? 0) === PAGE_SIZE)
     setLoading(false)
@@ -94,10 +98,11 @@ export function useMemos(categoryId?: string | null) {
 
   const fetchMore = useCallback(() => {
     if (hasMore) {
-      setPage(p => p + 1)
-      fetchMemos(false)
+      const nextPage = page + 1
+      setPage(nextPage)
+      fetchMemos(false, nextPage)
     }
-  }, [hasMore, fetchMemos])
+  }, [hasMore, page, fetchMemos])
 
   return {
     memos,

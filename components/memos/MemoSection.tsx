@@ -131,7 +131,7 @@ export function MemoSection({ categories, onOpenCategoryManager, onCategoryChang
         </div>
       ) : (
         <div className="memo-grid">
-          {filtered.map(memo => (
+          {Array.from(new Map(filtered.map(m => [m.id, m])).values()).map(memo => (
             <MemoCard
               key={memo.id}
               memo={memo}
